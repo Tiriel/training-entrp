@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index{% endblock %}
+
+{% block body %}
+    <h1>Task index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>DueAt</th>
+            <th>StartAt / EndAt</th>
+            <th>Finished</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.category.name }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.dueAt ? task.dueAt|date('Y-m-d H:i:s') : '-' }}</td>
+                <td>{{ task.startAt ? task.startAt|date('Y-m-d H:i:s') : '-' }} /
+                    {{ task.endAt ? task.endAt|date('Y-m-d H:i:s') : '-' }}</td>
+                <td>{{ task.finished ? 'Yes' : 'No' }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
+                        <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-outline-primary">edit</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_task_new') }}" class="btn btn-primary">Create new</a>
+{% endblock %}
