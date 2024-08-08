@@ -25,7 +25,7 @@ class Task
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'tasks')]
     private ?Category $category = null;
 
     #[ORM\Column]
