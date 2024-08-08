@@ -4,14 +4,12 @@ namespace App\Task;
 
 use App\Entity\Task;
 use App\Entity\User;
-use App\Repository\CategoryRepository;
 use App\Repository\TaskRepository;
 
 class TaskPrioritizer
 {
     public function __construct(
         protected readonly TaskRepository $taskRepository,
-        protected readonly CategoryRepository $categoryRepository,
     )
     {
     }
