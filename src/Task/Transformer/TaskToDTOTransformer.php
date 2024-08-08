@@ -14,7 +14,7 @@ class TaskToDTOTransformer
             $task->getName(),
             $task->getPriority(),
             $task->getDescription(),
-            $task->getCategory()->getName(),
+            $task->getCategory()?->getName(),
             $task->getCreatedAt(),
             $task->getDueAt(),
             $task->getStartAt(),
