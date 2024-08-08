@@ -10,18 +10,23 @@ use PHPUnit\Framework\TestCase;
 
 class TaskToDTOTransformerTest extends TestCase
 {
+    protected static TaskToDTOTransformer $transformer;
+
+    public static function setUpBeforeClass(): void
+    {
+        static::$transformer = new TaskToDTOTransformer();
+    }
+
     public function testTransformerReturnsTaskReadDtoInstance(): void
     {
-        $transformer = new TaskToDTOTransformer();
-        $obj = $transformer->transform($this->createTask());
+        $obj = static::$transformer->transform($this->createTask());
 
         $this->assertInstanceOf(TaskRead::class, $obj);
     }
 
     public function testDtoHasOriginalObjectsName(): void
     {
-        $transformer = new TaskToDTOTransformer();
-        $obj = $transformer->transform($this->createTask());
+        $obj = static::$transformer->transform($this->createTask());
 
         $this->assertSame('test', $obj->getName());
     }
@@ -30,8 +35,7 @@ class TaskToDTOTransformerTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $transformer = new TaskToDTOTransformer();
-        $obj = $transformer->transform($this->createTask(false));
+        $obj = static::$transformer->transform($this->createTask(false));
     }
 
     private function createTask(bool $withCategory = true): Task
