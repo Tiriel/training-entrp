@@ -17,7 +17,7 @@ class AppFixtures extends Fixture implements OrderedFixtureInterface
         TaskFactory::createMany(10);
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 2;
     }
